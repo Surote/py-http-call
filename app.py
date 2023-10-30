@@ -9,7 +9,13 @@ app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 @app.route('/')
 def home():
     api_url = str(os.getenv("api_endpoint","localhost:8080/api/v1"))
-    headers = {'local_service': 'call from py-reader','X-B3-Traceid': str(request.headers['X-B3-Traceid']),'X-B3-Spanid': str(request.headers['X-B3-Spanid']),'X-B3-Parentspanid': str(request.headers['X-B3-Parentspanid']),'X-B3-Sampled': str(request.headers['X-B3-Sampled']),'X-Request-Id': str(request.headers['X-Request-Id'])}
+    headers = {'local_service': 'call from py-reader',
+                'X-B3-Traceid': str(request.headers['X-B3-Traceid']),
+                #'X-B3-Spanid': str(request.headers['X-B3-Spanid']),
+                'X-B3-Parentspanid': str(request.headers['X-B3-Parentspanid']),
+               # 'X-B3-Sampled': str(request.headers['X-B3-Sampled']),
+                #'X-Request-Id': str(request.headers['X-Request-Id'])}
+    }
     response = requests.get('http://'+api_url,headers=headers)
 
     if response.status_code == 200:
