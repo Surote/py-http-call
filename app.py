@@ -14,8 +14,8 @@ def home():
                 #'X-B3-Spanid': str(request.headers['X-B3-Spanid']),
                 'X-B3-Parentspanid': str(request.headers['X-B3-Parentspanid']),
                # 'X-B3-Sampled': str(request.headers['X-B3-Sampled']),
-                #'X-Request-Id': str(request.headers['X-Request-Id'])}
-    }
+                'X-Request-Id': str(request.headers['X-Request-Id'])}
+    
     response = requests.get('http://'+api_url,headers=headers)
 
     if response.status_code == 200:
