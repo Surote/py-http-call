@@ -8,7 +8,7 @@ app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 
 @app.route('/')
 def home():
-    api_url = str(os.getenv("api_endpoint","localhost:8080"))
+    api_url = str(os.getenv("api_endpoint","localhost:8080/api/v1"))
     headers = {'local_service': 'call from py-reader'}
     response = requests.get('http://'+api_url,headers=headers)
 
