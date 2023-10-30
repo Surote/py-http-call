@@ -1,4 +1,4 @@
-from flask import Flask,render_template
+from flask import Flask,render_template,request
 import requests
 import json
 import os
@@ -9,7 +9,7 @@ app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 @app.route('/')
 def home():
     api_url = str(os.getenv("api_endpoint","localhost:8080/api/v1"))
-    headers = {'local_service': 'call from py-reader'}
+    headers = {'local_service': 'call from py-reader','X-B3-Traceid': str(request.headers['X-B3-Traceid'])}
     response = requests.get('http://'+api_url,headers=headers)
 
     if response.status_code == 200:
