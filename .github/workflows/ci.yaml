@@ -26,3 +26,13 @@ jobs:
         with:
           push: true
           tags: surote/py-http-call:${{ github.sha }}
+
+      - name: Push To quay.io
+        id: push-to-quay
+        uses: redhat-actions/push-to-registry@v2
+        with:
+          image: py-http-call
+          tags: ${{ github.sha }}
+          registry: quay.io/rh_ee_swongpai
+          username: rh_ee_swongpai
+          password: ${{ secrets.QUAY_SECRET }}
