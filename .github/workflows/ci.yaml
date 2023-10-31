@@ -27,6 +27,15 @@ jobs:
           push: true
           tags: surote/py-http-call:${{ github.sha }}
 
+      - name: Build Image
+        id: build-image
+        uses: redhat-actions/buildah-build@v2
+        with:
+          image: py-http-call
+          tags: ${{ github.sha }}
+          containerfiles: |
+            ./Dockerfile
+
       - name: Push To quay.io
         id: push-to-quay
         uses: redhat-actions/push-to-registry@v2
