@@ -32,14 +32,12 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: false
-          tags: py-http-call:${{ github.sha }}
+          tags: quay.io/rh_ee_swongpai/py-http-call:${{ github.sha }}
 
       - name: Push To quay.io
         id: push-to-quay
         uses: redhat-actions/push-to-registry@v2
         with:
-          image: py-http-call
-          tags: py-http-call:${{ github.sha }}
-          registry: quay.io/rh_ee_swongpai
+          tags: quay.io/rh_ee_swongpai/py-http-call:${{ github.sha }}
           username: rh_ee_swongpai
           password: ${{ secrets.QUAY_SECRET }}
