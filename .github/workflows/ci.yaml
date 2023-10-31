@@ -35,8 +35,9 @@ jobs:
           username: ${{ secrets.QUAY_USER }}
           password: ${{ secrets.QUAY_SECRET }}
 
-      - 
-        name: Building & Pushing Docker Image
-        run: |
-          docker build . --tag quay.io/${{secrets.QUAY_USER}}/py-http-call:${{ github.sha }}
-          docker push quay.io/${{secrets.QUAY_USER}}/py-http-call:${{ github.sha }}
+      -
+        name: Build and push to QUAY
+        uses: docker/build-push-action@v4
+        with:
+          push: true
+          tags: quay.io/${{secrets.QUAY_USER}}/py-http-call:${{ github.sha }}
