@@ -31,8 +31,8 @@ jobs:
         id: push-to-quay
         uses: redhat-actions/push-to-registry@v2
         with:
-          image: py-http-call
-          tags: surote/${{ github.sha }}
+          image: surote/py-http-call
+          tags: ${{ github.sha }}
           registry: quay.io/rh_ee_swongpai
           username: rh_ee_swongpai
           password: ${{ secrets.QUAY_SECRET }}
