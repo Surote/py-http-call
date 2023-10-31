@@ -28,16 +28,15 @@ jobs:
           tags: surote/py-http-call:${{ github.sha }}
 
       -
-        name: Build for Quay
-        uses: docker/build-push-action@v4
+        name: Login to QUAY 
+        uses: docker/login-action@v2
         with:
-          push: false
-          tags: quay.io/rh_ee_swongpai/py-http-call:${{ github.sha }}
-
-      - name: Push To quay.io
-        id: push-to-quay
-        uses: redhat-actions/push-to-registry@v2
-        with:
-          tags: quay.io/rh_ee_swongpai/py-http-call:${{ github.sha }}
-          username: rh_ee_swongpai
+          registry: quay.io
+          username: ${{ secrets.QUAY_USER }}
           password: ${{ secrets.QUAY_SECRET }}
+
+      - 
+        name: Building & Pushing Docker Image
+        run: |
+          docker build . --tag quay.io/${{secrets.QUAY_USER}}/py-http-call:${{ github.sha }}
+          docker push quay.io/${{secrets.QUAY_USER}}/py-http-call:${{ github.sha }}
