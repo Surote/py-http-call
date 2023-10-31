@@ -1,4 +1,4 @@
-FROM python:3.11-slim-buster
+FROM registry.access.redhat.com/ubi8/python-311:1-25.1698062290
 
 WORKDIR /py-http-call
 
