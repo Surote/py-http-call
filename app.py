@@ -34,5 +34,9 @@ def local_api():
     data = {'data': 'Cannot find correct env api_endpoint'}
     return json.dumps(data),200
 
+@app.route('/completed')
+def complete():
+    return 0
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=8081)
