@@ -14,9 +14,17 @@ def home():
                 'X-B3-Spanid': str(request.headers.get('X-B3-Spanid')),
                 'X-B3-Parentspanid': str(request.headers.get('X-B3-Parentspanid'))
     }
-    response = requests.get('http://'+api_url,headers=headers)
+    try:
+        response = requests.get('http://'+api_url,headers=headers, timeout=2)
+    except:
+        response = {'data': 'Cannot find correct env api_endpoint might be timeout'}
 
-    if response.status_code == 200:
+    try:
+        resp = response.status_code
+    except:
+        resp = {'data': 'Cannot find correct env api_endpoint might be timeout'}
+
+    if resp == 200 or 'Cannot find' in resp:
         # If the request was successful, parse the JSON response
         data = response.json()
 
@@ -27,7 +35,7 @@ def home():
         #return data
     else:
         # If the request was not successful, return an error message
-        return "Header return not 200"
+        return "Cannot connect to the Backend"
 
 @app.route('/api/v1')
 def local_api():
