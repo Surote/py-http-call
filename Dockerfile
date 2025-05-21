@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi9/python-311:1-34
+FROM registry.access.redhat.com/ubi9/python-312:9.6-1747333115
 
 WORKDIR /py-http-call
 
